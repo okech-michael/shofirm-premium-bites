@@ -84,7 +84,7 @@ function ProductDetail() {
               <div className="mt-8">
                 <h3 className="text-xs uppercase tracking-[0.2em] text-navy font-semibold">Key Benefits</h3>
                 <ul className="mt-4 space-y-3">
-                  {product.benefits.map((b) => (
+                  {product.benefits.map((b: string) => (
                     <li key={b} className="flex items-center gap-3 text-foreground/80">
                       <span className="h-6 w-6 rounded-full bg-gold/15 text-gold grid place-items-center"><Check size={14} /></span>
                       {b}
