@@ -8,18 +8,6 @@
   ],
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/dist/client/assets/$1"
-    },
-    {
-      "src": "/robots.txt",
-      "dest": "/dist/client/robots.txt"
-    },
-    {
-      "src": "/(.*\\.(js|css|jpg|jpeg|png|svg|webp|woff2|woff|ttf|json|txt))",
-      "dest": "/dist/client/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/api/vercel.ts"
     }

@@ -4,7 +4,41 @@ import { fileURLToPath } from "url";
 import server from "../dist/server/server.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const clientDistRoot = path.join(__dirname, "..", "dist", "client");
+const candidateRoots = [
+  path.join(process.cwd(), "dist", "client"),
+  path.join(__dirname, "..", "dist", "client"),
+  path.join(__dirname, "..", "..", "dist", "client"),
+  path.join(__dirname, "..", "..", "..", "dist", "client"),
+  path.join(__dirname, "..", "..", "..", "..", "dist", "client"),
+];
+let clientDistRoot = candidateRoots[0];
+
+async function resolveClientDistRoot() {
+  for (const candidate of candidateRoots) {
+    try {
+      await fs.access(candidate);
+      clientDistRoot = candidate;
+      return candidate;
+    } catch {
+      // ignore missing candidate
+    }
+  }
+
+  let current = __dirname;
+  for (let i = 0; i < 6; i++) {
+    const candidate = path.join(current, "dist", "client");
+    try {
+      await fs.access(candidate);
+      clientDistRoot = candidate;
+      return candidate;
+    } catch {
+      // ignore missing candidate
+    }
+    current = path.dirname(current);
+  }
+
+  return clientDistRoot;
+}
 
 const mimeMap = {
   css: "text/css",
@@ -28,6 +62,7 @@ function getContentType(filePath) {
 }
 
 async function serveStatic(req, res) {
+  const clientRoot = await resolveClientDistRoot();
   const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
   const pathname = url.pathname;
 
@@ -37,11 +72,11 @@ async function serveStatic(req, res) {
 
   let filePath;
   if (pathname === "/robots.txt") {
-    filePath = path.join(clientDistRoot, "robots.txt");
+    filePath = path.join(clientRoot, "robots.txt");
   } else if (pathname.startsWith("/assets/")) {
-    filePath = path.join(clientDistRoot, pathname.slice(1));
+    filePath = path.join(clientRoot, pathname.slice(1));
   } else if (pathname.match(/\.(js|css|jpg|jpeg|png|svg|webp|woff2|woff|ttf|json|txt|xml)$/i)) {
-    filePath = path.join(clientDistRoot, pathname.slice(1));
+    filePath = path.join(clientRoot, pathname.slice(1));
   } else {
     return false;
   }
