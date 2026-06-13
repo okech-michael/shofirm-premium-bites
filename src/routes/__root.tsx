@@ -7,10 +7,9 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -37,9 +36,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -78,21 +74,40 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "ShoFirm Foods Limited — Premium Nigerian Swallow Flour Products" },
-      { name: "description", content: "ShoFirm Foods manufactures and distributes premium swallow flours, garri, cassava, yam, plantain flour and baby foods across Nigeria." },
+      {
+        name: "description",
+        content:
+          "ShoFirm Foods manufactures and distributes premium swallow flours, garri, cassava, yam, plantain flour and baby foods across Nigeria.",
+      },
       { name: "author", content: "ShoFirm Foods Limited" },
-      { property: "og:title", content: "ShoFirm Foods Limited — Premium Nigerian Swallow Flour Products" },
-      { property: "og:description", content: "ShoFirm Foods manufactures and distributes premium swallow flours, garri, cassava, yam, plantain flour and baby foods across Nigeria." },
+      {
+        property: "og:title",
+        content: "ShoFirm Foods Limited — Premium Nigerian Swallow Flour Products",
+      },
+      {
+        property: "og:description",
+        content:
+          "ShoFirm Foods manufactures and distributes premium swallow flours, garri, cassava, yam, plantain flour and baby foods across Nigeria.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "ShoFirm Foods Limited — Premium Nigerian Swallow Flour Products" },
-      { name: "twitter:description", content: "ShoFirm Foods manufactures and distributes premium swallow flours, garri, cassava, yam, plantain flour and baby foods across Nigeria." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/502d766a-6561-418d-a67e-99b666409845/id-preview-ed1cb2ea--18c64224-31ab-47da-914a-3e8c938a1ae8.lovable.app-1781263122858.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/502d766a-6561-418d-a67e-99b666409845/id-preview-ed1cb2ea--18c64224-31ab-47da-914a-3e8c938a1ae8.lovable.app-1781263122858.png" },
+      {
+        name: "twitter:title",
+        content: "ShoFirm Foods Limited — Premium Nigerian Swallow Flour Products",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "ShoFirm Foods manufactures and distributes premium swallow flours, garri, cassava, yam, plantain flour and baby foods across Nigeria.",
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;700;800;900&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;700;800;900&display=swap",
+      },
       { rel: "stylesheet", href: appCss },
     ],
   }),

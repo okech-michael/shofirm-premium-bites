@@ -29,7 +29,10 @@ function OrderPage() {
           <h1 className="mt-4 text-5xl md:text-7xl font-display font-extrabold text-navy leading-[1.02]">
             Place an <span className="text-gold italic font-light">order.</span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-foreground/70">Fill out the form and our team will reach out to confirm your order and arrange delivery.</p>
+          <p className="mt-6 max-w-2xl text-lg text-foreground/70">
+            Fill out the form and our team will reach out to confirm your order and arrange
+            delivery.
+          </p>
         </div>
       </section>
 
@@ -55,27 +58,51 @@ function OrderPage() {
             <Block title="Product Selection">
               <Grid>
                 <label className="block">
-                  <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">Product *</span>
-                  <select value={product} onChange={(e) => setProduct(e.target.value)} className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20">
+                  <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">
+                    Product *
+                  </span>
+                  <select
+                    value={product}
+                    onChange={(e) => setProduct(e.target.value)}
+                    className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
+                  >
                     {products.map((p) => (
-                      <option key={p.slug} value={p.slug}>{p.name} — {p.category}</option>
+                      <option key={p.slug} value={p.slug}>
+                        {p.name} — {p.category}
+                      </option>
                     ))}
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">Pack Size *</span>
+                  <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">
+                    Pack Size *
+                  </span>
                   <select className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20">
-                    {["1 kg", "5 kg", "10 kg", "25 kg", "50 kg"].map((s) => <option key={s}>{s}</option>)}
+                    {["1 kg", "5 kg", "10 kg", "25 kg", "50 kg"].map((s) => (
+                      <option key={s}>{s}</option>
+                    ))}
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">Quantity *</span>
-                  <input type="number" min={1} value={qty} onChange={(e) => setQty(Number(e.target.value))} className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20" />
+                  <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">
+                    Quantity *
+                  </span>
+                  <input
+                    type="number"
+                    min={1}
+                    value={qty}
+                    onChange={(e) => setQty(Number(e.target.value))}
+                    className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
+                  />
                 </label>
                 <label className="block">
-                  <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">Order Type *</span>
+                  <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">
+                    Order Type *
+                  </span>
                   <select className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20">
-                    <option>Retail</option><option>Wholesale</option><option>Distributor</option>
+                    <option>Retail</option>
+                    <option>Wholesale</option>
+                    <option>Distributor</option>
                   </select>
                 </label>
               </Grid>
@@ -83,15 +110,26 @@ function OrderPage() {
 
             <Block title="Special Requests">
               <label className="block">
-                <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">Notes (optional)</span>
-                <textarea rows={4} className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Delivery instructions, branding requirements, etc." />
+                <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">
+                  Notes (optional)
+                </span>
+                <textarea
+                  rows={4}
+                  className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20"
+                  placeholder="Delivery instructions, branding requirements, etc."
+                />
               </label>
             </Block>
 
-            <button type="submit" className="btn-gold w-full py-4 rounded-full text-sm inline-flex items-center justify-center gap-2">
+            <button
+              type="submit"
+              className="btn-gold w-full py-4 rounded-full text-sm inline-flex items-center justify-center gap-2"
+            >
               <ShoppingBag size={16} /> Submit Order
             </button>
-            <p className="text-xs text-muted-foreground text-center">Our team will contact you within 24 hours to confirm and arrange payment & delivery.</p>
+            <p className="text-xs text-muted-foreground text-center">
+              Our team will contact you within 24 hours to confirm and arrange payment & delivery.
+            </p>
           </form>
         </div>
       </section>
@@ -110,12 +148,29 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
     </div>
   );
 }
-function Grid({ children }: { children: React.ReactNode }) { return <div className="grid md:grid-cols-2 gap-4">{children}</div>; }
-function Input({ label, type = "text", required }: { label: string; type?: string; required?: boolean }) {
+function Grid({ children }: { children: React.ReactNode }) {
+  return <div className="grid md:grid-cols-2 gap-4">{children}</div>;
+}
+function Input({
+  label,
+  type = "text",
+  required,
+}: {
+  label: string;
+  type?: string;
+  required?: boolean;
+}) {
   return (
     <label className="block">
-      <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">{label}{required && " *"}</span>
-      <input type={type} required={required} className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all" />
+      <span className="text-xs uppercase tracking-[0.18em] text-navy/70 font-semibold">
+        {label}
+        {required && " *"}
+      </span>
+      <input
+        type={type}
+        required={required}
+        className="mt-2 w-full bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all"
+      />
     </label>
   );
 }

@@ -9,7 +9,11 @@ export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
       { title: "Products — ShoFirm Foods" },
-      { name: "description", content: "Browse our premium catalogue: garri, semo, yam flour, plantain flour, cassava flour, baby foods and more." },
+      {
+        name: "description",
+        content:
+          "Browse our premium catalogue: garri, semo, yam flour, plantain flour, cassava flour, baby foods and more.",
+      },
       { property: "og:title", content: "Products — ShoFirm Foods" },
       { property: "og:description", content: "Premium Nigerian flour products catalogue." },
     ],
@@ -26,19 +30,24 @@ function ProductsPage() {
     return products
       .filter((p) => (cat === "All" ? true : p.category === cat))
       .filter((p) => (q ? p.name.toLowerCase().includes(q.toLowerCase()) : true))
-      .sort((a, b) => (sort === "name" ? a.name.localeCompare(b.name) : a.category.localeCompare(b.category)));
+      .sort((a, b) =>
+        sort === "name" ? a.name.localeCompare(b.name) : a.category.localeCompare(b.category),
+      );
   }, [cat, q, sort]);
 
   return (
     <SiteShell>
       <section className="pt-36 pb-12 bg-warm">
         <div className="container-pad">
-          <div className="text-gold text-xs uppercase tracking-[0.25em] font-semibold">Catalogue</div>
+          <div className="text-gold text-xs uppercase tracking-[0.25em] font-semibold">
+            Catalogue
+          </div>
           <h1 className="mt-4 text-5xl md:text-7xl font-display font-extrabold text-navy text-balance leading-[1.02]">
             Our Premium <span className="text-gold italic font-light">Products</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-foreground/70">
-            Twelve premium products, milled and packaged with care, ready for homes, retailers, wholesalers and distributors.
+            Twelve premium products, milled and packaged with care, ready for homes, retailers,
+            wholesalers and distributors.
           </p>
         </div>
       </section>
@@ -51,7 +60,9 @@ function ProductsPage() {
                 key={c}
                 onClick={() => setCat(c)}
                 className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all ${
-                  cat === c ? "bg-navy text-white" : "bg-white text-navy border border-border hover:border-gold"
+                  cat === c
+                    ? "bg-navy text-white"
+                    : "bg-white text-navy border border-border hover:border-gold"
                 }`}
               >
                 {c}
@@ -60,7 +71,10 @@ function ProductsPage() {
           </div>
           <div className="flex gap-3 items-center">
             <div className="relative">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <Search
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
@@ -83,7 +97,9 @@ function ProductsPage() {
       <section className="py-16 bg-background">
         <div className="container-pad">
           {filtered.length === 0 ? (
-            <p className="text-center text-muted-foreground py-20">No products match your filters.</p>
+            <p className="text-center text-muted-foreground py-20">
+              No products match your filters.
+            </p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filtered.map((p, i) => (
@@ -99,14 +115,29 @@ function ProductsPage() {
                     className="group block rounded-3xl overflow-hidden bg-card border border-border hover:border-gold hover:shadow-elevated transition-all duration-500 hover:-translate-y-1.5"
                   >
                     <div className="aspect-square overflow-hidden bg-muted">
-                      <img src={p.image} alt={p.name} loading="lazy" width={600} height={600} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        loading="lazy"
+                        width={600}
+                        height={600}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
                     </div>
                     <div className="p-6">
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">{p.category}</div>
-                      <h3 className="mt-2 font-display font-extrabold text-xl text-navy">{p.name}</h3>
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">
+                        {p.category}
+                      </div>
+                      <h3 className="mt-2 font-display font-extrabold text-xl text-navy">
+                        {p.name}
+                      </h3>
                       <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.short}</p>
                       <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-navy group-hover:text-gold transition-colors">
-                        View Product <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                        View Product{" "}
+                        <ArrowRight
+                          size={14}
+                          className="transition-transform group-hover:translate-x-1"
+                        />
                       </div>
                     </div>
                   </Link>

@@ -1,7 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Award, Truck, ShieldCheck, Factory, Sparkles, Heart, Quote } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  Truck,
+  ShieldCheck,
+  Factory,
+  Sparkles,
+  Heart,
+  Quote,
+} from "lucide-react";
 import { SiteShell } from "@/components/site/SiteShell";
 import { products } from "@/lib/products";
 import heroImg from "@/assets/hero.jpg";
@@ -12,7 +21,11 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "ShoFirm Foods — Premium Nigerian Swallow Flour Products" },
-      { name: "description", content: "Premium swallow flours, garri, cassava, yam and plantain flour from ShoFirm Foods. Trusted by homes, retailers and distributors across Nigeria." },
+      {
+        name: "description",
+        content:
+          "Premium swallow flours, garri, cassava, yam and plantain flour from ShoFirm Foods. Trusted by homes, retailers and distributors across Nigeria.",
+      },
       { property: "og:title", content: "ShoFirm Foods — Premium Nigerian Flour Products" },
       { property: "og:description", content: "Quality flour products trusted nationwide." },
     ],
@@ -46,12 +59,21 @@ function Hero() {
   return (
     <section ref={ref} className="relative h-screen min-h-[640px] overflow-hidden">
       <motion.div style={{ scale, y }} className="absolute inset-0">
-        <img src={heroImg} alt="Premium Nigerian flour products" className="h-full w-full object-cover" width={1920} height={1280} />
+        <img
+          src={heroImg}
+          alt="Premium Nigerian flour products"
+          className="h-full w-full object-cover"
+          width={1920}
+          height={1280}
+        />
       </motion.div>
       <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
       <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/30 to-transparent" />
 
-      <motion.div style={{ y: textY, opacity }} className="relative h-full container-pad flex flex-col justify-center">
+      <motion.div
+        style={{ y: textY, opacity }}
+        className="relative h-full container-pad flex flex-col justify-center"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,7 +89,8 @@ function Hero() {
           transition={{ delay: 0.35, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="mt-6 text-white font-display font-extrabold text-balance text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.95] max-w-5xl"
         >
-          Premium Nigerian <span className="text-gold italic font-light">Swallow Flour</span> Products
+          Premium Nigerian <span className="text-gold italic font-light">Swallow Flour</span>{" "}
+          Products
         </motion.h1>
 
         <motion.p
@@ -76,7 +99,8 @@ function Hero() {
           transition={{ delay: 0.55, duration: 0.8 }}
           className="mt-8 text-lg md:text-xl text-white/80 max-w-2xl text-balance"
         >
-          Delivering quality flour products trusted by homes, retailers, wholesalers, and distributors across Nigeria.
+          Delivering quality flour products trusted by homes, retailers, wholesalers, and
+          distributors across Nigeria.
         </motion.p>
 
         <motion.div
@@ -85,11 +109,17 @@ function Hero() {
           transition={{ delay: 0.75, duration: 0.8 }}
           className="mt-10 flex flex-wrap gap-4"
         >
-          <Link to="/products" className="btn-gold px-8 py-4 rounded-full text-sm font-semibold inline-flex items-center gap-2 group">
+          <Link
+            to="/products"
+            className="btn-gold px-8 py-4 rounded-full text-sm font-semibold inline-flex items-center gap-2 group"
+          >
             View Products
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </Link>
-          <Link to="/contact" className="px-8 py-4 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white hover:text-navy transition-all backdrop-blur-md">
+          <Link
+            to="/contact"
+            className="px-8 py-4 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white hover:text-navy transition-all backdrop-blur-md"
+          >
             Contact Us
           </Link>
         </motion.div>
@@ -106,7 +136,10 @@ function Hero() {
               { icon: Truck, label: "Nationwide Supply" },
               { icon: ShieldCheck, label: "Trusted Manufacturer" },
             ].map((f) => (
-              <div key={f.label} className="glass-card rounded-2xl px-5 py-4 flex items-center gap-3">
+              <div
+                key={f.label}
+                className="glass-card rounded-2xl px-5 py-4 flex items-center gap-3"
+              >
                 <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-gold to-[oklch(0.72_0.14_70)] grid place-items-center text-navy">
                   <f.icon size={18} />
                 </div>
@@ -153,10 +186,13 @@ function Story() {
           </h2>
           <div className="mt-5 gold-divider" />
           <p className="mt-8 text-lg text-foreground/75 leading-relaxed">
-            ShoFirm Foods Limited is a Nigerian food manufacturer dedicated to producing premium swallow flours, garri, baby foods and specialty grains. Every product is rooted in tradition, refined with modern processing, and trusted in kitchens nationwide.
+            ShoFirm Foods Limited is a Nigerian food manufacturer dedicated to producing premium
+            swallow flours, garri, baby foods and specialty grains. Every product is rooted in
+            tradition, refined with modern processing, and trusted in kitchens nationwide.
           </p>
           <p className="mt-5 text-foreground/65 leading-relaxed">
-            From sourcing to packaging, we hold every step to a standard worthy of your family's table.
+            From sourcing to packaging, we hold every step to a standard worthy of your family's
+            table.
           </p>
           <div className="mt-10 grid grid-cols-3 gap-6">
             {[
@@ -165,8 +201,12 @@ function Story() {
               { v: "100%", l: "Quality Promise" },
             ].map((s) => (
               <div key={s.l}>
-                <div className="font-display font-extrabold text-3xl md:text-4xl text-gold">{s.v}</div>
-                <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{s.l}</div>
+                <div className="font-display font-extrabold text-3xl md:text-4xl text-gold">
+                  {s.v}
+                </div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">
+                  {s.l}
+                </div>
               </div>
             ))}
           </div>
@@ -194,7 +234,9 @@ function Story() {
               className="absolute -bottom-8 -left-8 hidden md:block glass-card rounded-2xl p-6 max-w-[260px]"
             >
               <div className="font-display font-extrabold text-2xl text-navy">Est. with care</div>
-              <p className="mt-2 text-sm text-foreground/70">Every batch hand-checked before it leaves our facility.</p>
+              <p className="mt-2 text-sm text-foreground/70">
+                Every batch hand-checked before it leaves our facility.
+              </p>
             </motion.div>
           </div>
         </Reveal>
@@ -213,8 +255,12 @@ function Categories() {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-navy max-w-2xl text-balance leading-[1.05]">
               Premium products for every Nigerian table.
             </h2>
-            <Link to="/products" className="btn-outline-navy px-6 py-3 rounded-full text-sm inline-flex items-center gap-2 group">
-              See all products <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            <Link
+              to="/products"
+              className="btn-outline-navy px-6 py-3 rounded-full text-sm inline-flex items-center gap-2 group"
+            >
+              See all products{" "}
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </Reveal>
@@ -244,11 +290,17 @@ function Categories() {
                   />
                 </div>
                 <div className="p-6">
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">{p.category}</div>
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">
+                    {p.category}
+                  </div>
                   <h3 className="mt-2 font-display font-extrabold text-xl text-navy">{p.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.short}</p>
                   <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-navy group-hover:text-gold transition-colors">
-                    View Product <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                    View Product{" "}
+                    <ArrowRight
+                      size={14}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
                   </div>
                 </div>
               </Link>
@@ -261,18 +313,35 @@ function Categories() {
 }
 
 const reasons = [
-  { icon: Award, title: "Premium Quality", desc: "Hand-selected ingredients, milled to perfection." },
+  {
+    icon: Award,
+    title: "Premium Quality",
+    desc: "Hand-selected ingredients, milled to perfection.",
+  },
   { icon: ShieldCheck, title: "Food Safety", desc: "NAFDAC-aligned standards on every batch." },
-  { icon: Truck, title: "Reliable Distribution", desc: "Nationwide delivery network you can trust." },
+  {
+    icon: Truck,
+    title: "Reliable Distribution",
+    desc: "Nationwide delivery network you can trust.",
+  },
   { icon: Factory, title: "Modern Processing", desc: "State-of-the-art milling and packaging." },
-  { icon: Sparkles, title: "Wholesale Supply", desc: "Volume orders for distributors & retailers." },
+  {
+    icon: Sparkles,
+    title: "Wholesale Supply",
+    desc: "Volume orders for distributors & retailers.",
+  },
   { icon: Heart, title: "Customer First", desc: "Dedicated support and consistent delivery." },
 ];
 
 function WhyUs() {
   return (
     <section className="relative py-24 md:py-32 bg-navy text-white overflow-hidden">
-      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `radial-gradient(circle at 20% 20%, oklch(0.78 0.14 78 / 0.6), transparent 50%), radial-gradient(circle at 80% 80%, oklch(0.58 0.21 27 / 0.4), transparent 50%)` }} />
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `radial-gradient(circle at 20% 20%, oklch(0.78 0.14 78 / 0.6), transparent 50%), radial-gradient(circle at 80% 80%, oklch(0.58 0.21 27 / 0.4), transparent 50%)`,
+        }}
+      />
       <div className="container-pad relative">
         <Reveal>
           <SectionLabel>Why Choose Us</SectionLabel>
@@ -323,14 +392,27 @@ function Featured() {
               transition={{ duration: 0.7, delay: i * 0.1 }}
               className="group relative rounded-3xl overflow-hidden aspect-[4/5] cursor-pointer"
             >
-              <img src={p.image} alt={p.name} loading="lazy" width={800} height={1000} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img
+                src={p.image}
+                alt={p.name}
+                loading="lazy"
+                width={800}
+                height={1000}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent opacity-90" />
               <div className="absolute inset-0 bg-gold/0 group-hover:bg-gold/10 transition-colors duration-500" />
               <div className="absolute bottom-0 inset-x-0 p-8">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">{p.category}</div>
+                <div className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">
+                  {p.category}
+                </div>
                 <h3 className="mt-2 font-display font-extrabold text-3xl text-white">{p.name}</h3>
                 <p className="mt-3 text-white/80 text-sm">{p.short}</p>
-                <Link to="/products/$slug" params={{ slug: p.slug }} className="mt-5 inline-flex items-center gap-2 text-sm text-gold font-semibold">
+                <Link
+                  to="/products/$slug"
+                  params={{ slug: p.slug }}
+                  className="mt-5 inline-flex items-center gap-2 text-sm text-gold font-semibold"
+                >
                   Discover <ArrowRight size={14} />
                 </Link>
               </div>
@@ -343,9 +425,17 @@ function Featured() {
 }
 
 const processSteps = [
-  { n: "01", t: "Raw Material Sourcing", d: "Hand-picked roots, grains and tubers from trusted Nigerian farms." },
+  {
+    n: "01",
+    t: "Raw Material Sourcing",
+    d: "Hand-picked roots, grains and tubers from trusted Nigerian farms.",
+  },
   { n: "02", t: "Processing", d: "Modern milling that preserves flavor, nutrition and texture." },
-  { n: "03", t: "Quality Assurance", d: "Every batch tested for purity, moisture and consistency." },
+  {
+    n: "03",
+    t: "Quality Assurance",
+    d: "Every batch tested for purity, moisture and consistency.",
+  },
   { n: "04", t: "Packaging", d: "Hygienic, durable packaging that locks in freshness." },
   { n: "05", t: "Distribution", d: "Nationwide logistics to retailers, wholesalers and homes." },
 ];
@@ -364,7 +454,14 @@ function Process() {
         <div className="mt-16 grid lg:grid-cols-2 gap-12 items-start">
           <Reveal>
             <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-elevated">
-              <img src={factoryImg} alt="ShoFirm manufacturing facility" loading="lazy" width={1600} height={1024} className="absolute inset-0 h-full w-full object-cover" />
+              <img
+                src={factoryImg}
+                alt="ShoFirm manufacturing facility"
+                loading="lazy"
+                width={1600}
+                height={1024}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
             </div>
           </Reveal>
@@ -397,9 +494,21 @@ function Process() {
 }
 
 const testimonials = [
-  { n: "Adaeze O.", r: "Distributor, Aba", q: "ShoFirm has been consistent on quality and on delivery. Our customers ask for their garri by name." },
-  { n: "Mr. Bola", r: "Retailer, Lagos", q: "The packaging, the texture, the consistency — everything feels premium. We restock weekly." },
-  { n: "Mrs. Chinwe", r: "Mother of three", q: "Their plantain flour is my go-to. Smooth swallow, my family loves it." },
+  {
+    n: "Adaeze O.",
+    r: "Distributor, Aba",
+    q: "ShoFirm has been consistent on quality and on delivery. Our customers ask for their garri by name.",
+  },
+  {
+    n: "Mr. Bola",
+    r: "Retailer, Lagos",
+    q: "The packaging, the texture, the consistency — everything feels premium. We restock weekly.",
+  },
+  {
+    n: "Mrs. Chinwe",
+    r: "Mother of three",
+    q: "Their plantain flour is my go-to. Smooth swallow, my family loves it.",
+  },
 ];
 
 function Testimonials() {
@@ -426,7 +535,9 @@ function Testimonials() {
               <p className="mt-5 text-foreground/85 text-lg leading-relaxed">"{t.q}"</p>
               <div className="mt-6 pt-6 border-t border-border">
                 <div className="font-display font-extrabold text-navy">{t.n}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{t.r}</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
+                  {t.r}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -439,7 +550,12 @@ function Testimonials() {
 function ContactCTA() {
   return (
     <section className="relative py-24 md:py-32 bg-navy overflow-hidden">
-      <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `radial-gradient(circle at 50% 0%, oklch(0.78 0.14 78 / 0.5), transparent 60%)` }} />
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `radial-gradient(circle at 50% 0%, oklch(0.78 0.14 78 / 0.5), transparent 60%)`,
+        }}
+      />
       <div className="container-pad relative text-center">
         <Reveal>
           <SectionLabel>
@@ -448,20 +564,31 @@ function ContactCTA() {
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="mt-6 text-4xl md:text-5xl lg:text-7xl font-display font-extrabold text-white max-w-4xl mx-auto text-balance leading-[0.95]">
-            Ready to order premium <span className="text-gold italic font-light">flour products?</span>
+            Ready to order premium{" "}
+            <span className="text-gold italic font-light">flour products?</span>
           </h2>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="mt-8 text-lg text-white/70 max-w-2xl mx-auto">
-            Wholesale, retail or home use — our team is ready to fulfill orders of any size, anywhere in Nigeria.
+            Wholesale, retail or home use — our team is ready to fulfill orders of any size,
+            anywhere in Nigeria.
           </p>
         </Reveal>
         <Reveal delay={0.3}>
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
-            <Link to="/contact" className="btn-gold px-8 py-4 rounded-full text-sm font-semibold inline-flex items-center gap-2 group">
-              Contact Us <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            <Link
+              to="/contact"
+              className="btn-gold px-8 py-4 rounded-full text-sm font-semibold inline-flex items-center gap-2 group"
+            >
+              Contact Us{" "}
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
-            <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white hover:text-navy transition-all">
+            <a
+              href="https://wa.me/23409032223878?text=Hello%20ShoFirm%2C%20I%20would%20like%20to%20enquire%20about%20your%20products."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-full text-sm font-semibold border border-white/30 text-white hover:bg-white hover:text-navy transition-all"
+            >
               WhatsApp Us
             </a>
           </div>

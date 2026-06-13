@@ -12,7 +12,10 @@ export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
       { title: "Gallery — ShoFirm Foods" },
-      { name: "description", content: "Explore ShoFirm Foods: products, facility and food photography." },
+      {
+        name: "description",
+        content: "Explore ShoFirm Foods: products, facility and food photography.",
+      },
       { property: "og:title", content: "Gallery — ShoFirm Foods" },
       { property: "og:description", content: "Premium food and facility photography." },
     ],
@@ -24,7 +27,10 @@ const extras = [storyImg, factoryImg, heroImg];
 
 function GalleryPage() {
   const [active, setActive] = useState<string | null>(null);
-  const items = [...products.map((p) => ({ src: p.image, alt: p.name })), ...extras.map((src, i) => ({ src, alt: `Scene ${i + 1}` }))];
+  const items = [
+    ...products.map((p) => ({ src: p.image, alt: p.name })),
+    ...extras.map((src, i) => ({ src, alt: `Scene ${i + 1}` })),
+  ];
 
   return (
     <SiteShell>
@@ -34,7 +40,9 @@ function GalleryPage() {
           <h1 className="mt-4 text-5xl md:text-7xl font-display font-extrabold text-navy leading-[1.02]">
             Captured with <span className="text-gold italic font-light">care.</span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-foreground/70">A look inside our products, our process and the people who make ShoFirm what it is.</p>
+          <p className="mt-6 max-w-2xl text-lg text-foreground/70">
+            A look inside our products, our process and the people who make ShoFirm what it is.
+          </p>
         </div>
       </section>
 
@@ -72,7 +80,10 @@ function GalleryPage() {
             onClick={() => setActive(null)}
             className="fixed inset-0 z-[100] bg-navy/95 backdrop-blur-xl grid place-items-center p-6"
           >
-            <button className="absolute top-6 right-6 h-11 w-11 rounded-full bg-white/10 text-white grid place-items-center hover:bg-gold hover:text-navy transition-colors" onClick={() => setActive(null)}>
+            <button
+              className="absolute top-6 right-6 h-11 w-11 rounded-full bg-white/10 text-white grid place-items-center hover:bg-gold hover:text-navy transition-colors"
+              onClick={() => setActive(null)}
+            >
               <X size={22} />
             </button>
             <motion.img

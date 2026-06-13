@@ -7,7 +7,10 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — ShoFirm Foods" },
-      { name: "description", content: "Reach ShoFirm Foods by phone, WhatsApp, email or visit us in Lagos, Nigeria." },
+      {
+        name: "description",
+        content: "Reach ShoFirm Foods by phone, WhatsApp, email or visit us in Lagos, Nigeria.",
+      },
       { property: "og:title", content: "Contact ShoFirm Foods" },
       { property: "og:description", content: "Get in touch with our team." },
     ],
@@ -25,7 +28,10 @@ function ContactPage() {
           <h1 className="mt-4 text-5xl md:text-7xl font-display font-extrabold text-navy leading-[1.02]">
             Let's <span className="text-gold italic font-light">talk.</span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-foreground/70">Wholesale enquiries, retail partnerships, or just a quick question — our team is ready to help.</p>
+          <p className="mt-6 max-w-2xl text-lg text-foreground/70">
+            Wholesale enquiries, retail partnerships, or just a quick question — our team is ready
+            to help.
+          </p>
         </div>
       </section>
 
@@ -33,9 +39,19 @@ function ContactPage() {
         <div className="container-pad grid lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2 space-y-4">
             {[
-              { icon: Phone, t: "Phone", v: "+234 800 000 0000", href: "tel:+2348000000000" },
-              { icon: MessageCircle, t: "WhatsApp", v: "Chat with us instantly", href: "https://wa.me/2348000000000" },
-              { icon: Mail, t: "Email", v: "hello@shofirmfoods.com", href: "mailto:hello@shofirmfoods.com" },
+              { icon: Phone, t: "Phone", v: "+234 09032223878", href: "tel:+23409032223878" },
+              {
+                icon: MessageCircle,
+                t: "WhatsApp",
+                v: "Chat with us instantly",
+                href: "https://wa.me/23409032223878?text=Hello%20ShoFirm%2C%20I%20would%20like%20to%20enquire%20about%20your%20products.",
+              },
+              {
+                icon: Mail,
+                t: "Email",
+                v: "shofirmfoods@gmail.com",
+                href: "mailto:shofirmfoods@gmail.com",
+              },
               { icon: MapPin, t: "Address", v: "Lagos, Nigeria" },
             ].map((c) => {
               const Inner = (
@@ -44,12 +60,20 @@ function ContactPage() {
                     <c.icon size={20} />
                   </div>
                   <div className="min-w-0">
-                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold">{c.t}</div>
+                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold">
+                      {c.t}
+                    </div>
                     <div className="mt-1 font-display font-extrabold text-navy">{c.v}</div>
                   </div>
                 </div>
               );
-              return c.href ? <a key={c.t} href={c.href} className="block">{Inner}</a> : <div key={c.t}>{Inner}</div>;
+              return c.href ? (
+                <a key={c.t} href={c.href} className="block">
+                  {Inner}
+                </a>
+              ) : (
+                <div key={c.t}>{Inner}</div>
+              );
             })}
             <div className="rounded-2xl overflow-hidden aspect-[4/3] border border-border">
               <iframe
@@ -79,8 +103,17 @@ function ContactPage() {
             </div>
             <Field label="Subject" type="text" />
             <Field label="Message" textarea />
-            <button type="submit" className="btn-gold px-8 py-4 rounded-full text-sm inline-flex items-center gap-2">
-              {sent ? "Message sent ✓" : (<>Send Message <Send size={16} /></>)}
+            <button
+              type="submit"
+              className="btn-gold px-8 py-4 rounded-full text-sm inline-flex items-center gap-2"
+            >
+              {sent ? (
+                "Message sent ✓"
+              ) : (
+                <>
+                  Send Message <Send size={16} />
+                </>
+              )}
             </button>
           </form>
         </div>
@@ -89,13 +122,31 @@ function ContactPage() {
   );
 }
 
-function Field({ label, type, textarea, required }: { label: string; type?: string; textarea?: boolean; required?: boolean }) {
-  const base = "w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all";
+function Field({
+  label,
+  type,
+  textarea,
+  required,
+}: {
+  label: string;
+  type?: string;
+  textarea?: boolean;
+  required?: boolean;
+}) {
+  const base =
+    "w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all";
   return (
     <label className="block">
-      <span className="text-xs uppercase tracking-[0.18em] text-white/60 font-semibold">{label}{required && " *"}</span>
+      <span className="text-xs uppercase tracking-[0.18em] text-white/60 font-semibold">
+        {label}
+        {required && " *"}
+      </span>
       <div className="mt-2">
-        {textarea ? <textarea rows={5} required={required} className={base} /> : <input type={type ?? "text"} required={required} className={base} />}
+        {textarea ? (
+          <textarea rows={5} required={required} className={base} />
+        ) : (
+          <input type={type ?? "text"} required={required} className={base} />
+        )}
       </div>
     </label>
   );

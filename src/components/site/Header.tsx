@@ -26,7 +26,9 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-warm/90 backdrop-blur-xl shadow-[0_4px_24px_-12px_rgba(11,35,65,0.15)]" : "bg-transparent"
+        scrolled
+          ? "bg-warm/90 backdrop-blur-xl shadow-[0_4px_24px_-12px_rgba(11,35,65,0.15)]"
+          : "bg-transparent"
       }`}
     >
       <div className="container-pad flex items-center justify-between h-20">
@@ -35,10 +37,14 @@ export function Header() {
             S
           </div>
           <div className="flex flex-col leading-none">
-            <span className={`font-display font-extrabold text-base tracking-tight ${scrolled ? "text-navy" : "text-white"}`}>
+            <span
+              className={`font-display font-extrabold text-base tracking-tight ${scrolled ? "text-navy" : "text-white"}`}
+            >
               ShoFirm
             </span>
-            <span className={`text-[10px] tracking-[0.2em] uppercase ${scrolled ? "text-muted-foreground" : "text-white/70"}`}>
+            <span
+              className={`text-[10px] tracking-[0.2em] uppercase ${scrolled ? "text-muted-foreground" : "text-white/70"}`}
+            >
               Foods Limited
             </span>
           </div>

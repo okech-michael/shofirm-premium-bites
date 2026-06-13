@@ -25,7 +25,9 @@ export const Route = createFileRoute("/products/$slug")({
     <SiteShell>
       <div className="container-pad pt-40 pb-24 text-center">
         <h1 className="text-3xl font-display font-extrabold text-navy">Product not found</h1>
-        <Link to="/products" className="mt-6 inline-block btn-gold px-6 py-3 rounded-full text-sm">Back to products</Link>
+        <Link to="/products" className="mt-6 inline-block btn-gold px-6 py-3 rounded-full text-sm">
+          Back to products
+        </Link>
       </div>
     </SiteShell>
   ),
@@ -41,13 +43,18 @@ export const Route = createFileRoute("/products/$slug")({
 
 function ProductDetail() {
   const { product } = Route.useLoaderData();
-  const related = products.filter((p) => p.slug !== product.slug && p.category === product.category).slice(0, 4);
+  const related = products
+    .filter((p) => p.slug !== product.slug && p.category === product.category)
+    .slice(0, 4);
 
   return (
     <SiteShell>
       <section className="pt-32 pb-20 bg-warm">
         <div className="container-pad">
-          <Link to="/products" className="inline-flex items-center gap-2 text-sm text-navy/70 hover:text-gold transition-colors mb-8">
+          <Link
+            to="/products"
+            className="inline-flex items-center gap-2 text-sm text-navy/70 hover:text-gold transition-colors mb-8"
+          >
             <ArrowLeft size={16} /> All products
           </Link>
 
@@ -59,11 +66,20 @@ function ProductDetail() {
               className="relative"
             >
               <div className="aspect-square rounded-3xl overflow-hidden shadow-elevated group">
-                <img src={product.image} alt={product.name} width={1024} height={1024} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  width={1024}
+                  height={1024}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
               </div>
               <div className="mt-4 grid grid-cols-4 gap-3">
                 {[product.image, product.image, product.image, product.image].map((src, i) => (
-                  <div key={i} className="aspect-square rounded-xl overflow-hidden border border-border hover:border-gold cursor-pointer">
+                  <div
+                    key={i}
+                    className="aspect-square rounded-xl overflow-hidden border border-border hover:border-gold cursor-pointer"
+                  >
                     <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
                   </div>
                 ))}
@@ -76,17 +92,27 @@ function ProductDetail() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="lg:sticky lg:top-28 lg:self-start"
             >
-              <div className="text-gold text-xs uppercase tracking-[0.25em] font-semibold">{product.category}</div>
-              <h1 className="mt-4 text-5xl md:text-6xl font-display font-extrabold text-navy leading-[1.02]">{product.name}</h1>
+              <div className="text-gold text-xs uppercase tracking-[0.25em] font-semibold">
+                {product.category}
+              </div>
+              <h1 className="mt-4 text-5xl md:text-6xl font-display font-extrabold text-navy leading-[1.02]">
+                {product.name}
+              </h1>
               <div className="mt-5 gold-divider" />
-              <p className="mt-8 text-lg text-foreground/75 leading-relaxed">{product.description}</p>
+              <p className="mt-8 text-lg text-foreground/75 leading-relaxed">
+                {product.description}
+              </p>
 
               <div className="mt-8">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-navy font-semibold">Key Benefits</h3>
+                <h3 className="text-xs uppercase tracking-[0.2em] text-navy font-semibold">
+                  Key Benefits
+                </h3>
                 <ul className="mt-4 space-y-3">
                   {product.benefits.map((b: string) => (
                     <li key={b} className="flex items-center gap-3 text-foreground/80">
-                      <span className="h-6 w-6 rounded-full bg-gold/15 text-gold grid place-items-center"><Check size={14} /></span>
+                      <span className="h-6 w-6 rounded-full bg-gold/15 text-gold grid place-items-center">
+                        <Check size={14} />
+                      </span>
                       {b}
                     </li>
                   ))}
@@ -94,17 +120,32 @@ function ProductDetail() {
               </div>
 
               <div className="mt-10 p-6 rounded-2xl bg-navy text-white">
-                <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Available in</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">
+                  Available in
+                </div>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {["1 kg", "5 kg", "10 kg", "25 kg", "50 kg"].map((s) => (
-                    <span key={s} className="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-sm">{s}</span>
+                    <span
+                      key={s}
+                      className="px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-sm"
+                    >
+                      {s}
+                    </span>
                   ))}
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link to="/order" className="btn-gold px-6 py-3 rounded-full text-sm inline-flex items-center gap-2">
+                  <Link
+                    to="/order"
+                    className="btn-gold px-6 py-3 rounded-full text-sm inline-flex items-center gap-2"
+                  >
                     Place an Order <ArrowRight size={16} />
                   </Link>
-                  <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full text-sm font-semibold border border-white/30 hover:bg-white hover:text-navy transition-all inline-flex items-center gap-2">
+                  <a
+                    href="https://wa.me/23409032223878?text=Hello%20ShoFirm%2C%20I%20would%20like%20to%20enquire%20about%20your%20products."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-full text-sm font-semibold border border-white/30 hover:bg-white hover:text-navy transition-all inline-flex items-center gap-2"
+                  >
                     <MessageCircle size={16} /> WhatsApp
                   </a>
                 </div>
@@ -117,7 +158,9 @@ function ProductDetail() {
       {related.length > 0 && (
         <section className="py-20 bg-background">
           <div className="container-pad">
-            <h2 className="text-3xl md:text-4xl font-display font-extrabold text-navy">You may also like</h2>
+            <h2 className="text-3xl md:text-4xl font-display font-extrabold text-navy">
+              You may also like
+            </h2>
             <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
               {related.map((p) => (
                 <Link
@@ -127,10 +170,17 @@ function ProductDetail() {
                   className="group block rounded-3xl overflow-hidden bg-card border border-border hover:border-gold transition-all hover:-translate-y-1"
                 >
                   <div className="aspect-square overflow-hidden bg-muted">
-                    <img src={p.image} alt={p.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
                   </div>
                   <div className="p-5">
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">{p.category}</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-gold font-semibold">
+                      {p.category}
+                    </div>
                     <h3 className="mt-2 font-display font-extrabold text-lg text-navy">{p.name}</h3>
                   </div>
                 </Link>

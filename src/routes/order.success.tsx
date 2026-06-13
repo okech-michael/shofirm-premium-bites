@@ -40,7 +40,8 @@ function SuccessPage() {
             transition={{ delay: 0.5 }}
             className="mt-6 text-lg text-foreground/70"
           >
-            Thank you for choosing ShoFirm Foods. Our team will reach out within 24 hours to confirm your order, payment and delivery details.
+            Thank you for choosing ShoFirm Foods. Our team will reach out within 24 hours to confirm
+            your order, payment and delivery details.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -48,8 +49,12 @@ function SuccessPage() {
             transition={{ delay: 0.7 }}
             className="mt-10 flex flex-wrap gap-3 justify-center"
           >
-            <Link to="/" className="btn-gold px-6 py-3 rounded-full text-sm">Back to home</Link>
-            <Link to="/products" className="btn-outline-navy px-6 py-3 rounded-full text-sm">Browse products</Link>
+            <Link to="/" className="btn-gold px-6 py-3 rounded-full text-sm">
+              Back to home
+            </Link>
+            <Link to="/products" className="btn-outline-navy px-6 py-3 rounded-full text-sm">
+              Browse products
+            </Link>
           </motion.div>
         </div>
       </section>
