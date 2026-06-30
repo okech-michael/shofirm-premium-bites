@@ -1,19 +1,21 @@
 import { promises as fs } from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import server from "../dist/server/server.js";
+import * as path from "path";
+import type { IncomingMessage, ServerResponse } from "http";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = process.cwd();
+const serverPromise = import("../dist/server/server.js") as Promise<{
+  default: { fetch(request: Request, ...args: any[]): Promise<Response> };
+}>;
 const candidateRoots = [
-  path.join(process.cwd(), "dist", "client"),
-  path.join(__dirname, "..", "dist", "client"),
-  path.join(__dirname, "..", "..", "dist", "client"),
-  path.join(__dirname, "..", "..", "..", "dist", "client"),
-  path.join(__dirname, "..", "..", "..", "..", "dist", "client"),
+  path.join(projectRoot, "dist", "client"),
+  path.join(projectRoot, "..", "dist", "client"),
+  path.join(projectRoot, "..", "..", "dist", "client"),
+  path.join(projectRoot, "..", "..", "..", "dist", "client"),
+  path.join(projectRoot, "..", "..", "..", "..", "dist", "client"),
 ];
 let clientDistRoot = candidateRoots[0];
 
-async function resolveClientDistRoot() {
+async function resolveClientDistRoot(): Promise<string> {
   for (const candidate of candidateRoots) {
     try {
       await fs.access(candidate);
@@ -40,7 +42,7 @@ async function resolveClientDistRoot() {
   return clientDistRoot;
 }
 
-const mimeMap = {
+const mimeMap: Record<string, string> = {
   css: "text/css",
   js: "application/javascript",
   jpg: "image/jpeg",
@@ -56,12 +58,12 @@ const mimeMap = {
   xml: "application/xml",
 };
 
-function getContentType(filePath) {
+function getContentType(filePath: string): string {
   const ext = path.extname(filePath).slice(1).toLowerCase();
   return mimeMap[ext] || "application/octet-stream";
 }
 
-async function serveStatic(req, res) {
+async function serveStatic(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
   const clientRoot = await resolveClientDistRoot();
   const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
   const pathname = url.pathname;
@@ -70,7 +72,7 @@ async function serveStatic(req, res) {
     return false;
   }
 
-  let filePath;
+  let filePath: string;
   if (pathname === "/robots.txt") {
     filePath = path.join(clientRoot, "robots.txt");
   } else if (pathname.startsWith("/assets/")) {
@@ -83,16 +85,17 @@ async function serveStatic(req, res) {
 
   try {
     const data = await fs.readFile(filePath);
-    res.status(200);
+    res.statusCode = 200;
     res.setHeader("content-type", getContentType(filePath));
     res.setHeader("cache-control", "public, max-age=3600");
-    return res.send(data);
+    res.end(data);
+    return true;
   } catch {
     return false;
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const staticServed = await serveStatic(req, res);
   if (staticServed) {
     return;
@@ -102,20 +105,31 @@ export default async function handler(req, res) {
   const host = req.headers.host || "localhost";
   const url = `${protocol}://${host}${req.url || "/"}`;
 
+  const requestBody: ArrayBuffer | undefined =
+    req.method === "GET" || req.method === "HEAD"
+      ? undefined
+      : await new Promise<ArrayBuffer | undefined>((resolve, reject) => {
+          const chunks: Uint8Array[] = [];
+          req.on("data", (chunk: Uint8Array) => chunks.push(chunk));
+          req.on("end", () => resolve(chunks.length ? Buffer.concat(chunks).buffer : undefined));
+          req.on("error", reject);
+        });
+
   const request = new Request(url, {
     method: req.method,
-    headers: req.headers,
-    body: req.method === "GET" || req.method === "HEAD" ? undefined : req,
+    headers: req.headers as HeadersInit,
+    body: requestBody,
   });
 
+  const server = (await serverPromise).default;
   const response = await server.fetch(request, undefined, undefined);
 
-  res.status(response.status);
-  response.headers.forEach((value, name) => {
+  res.statusCode = response.status;
+  response.headers.forEach((value: string, name: string) => {
     if (name.toLowerCase() === "transfer-encoding") return;
     res.setHeader(name, value);
   });
 
   const body = await response.arrayBuffer();
-  res.send(Buffer.from(body));
+  res.end(Buffer.from(body));
 }
